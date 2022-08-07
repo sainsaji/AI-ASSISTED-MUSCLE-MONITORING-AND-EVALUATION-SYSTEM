@@ -4,7 +4,7 @@ from aiortc.contrib.media import MediaRecorder
 
 from streamlit_webrtc import VideoProcessorBase, WebRtcMode, webrtc_streamer
 
-
+act_lev = "Low"
 def run_cap():
     class OpenCVEdgeProcessor(VideoProcessorBase):
         def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
