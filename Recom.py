@@ -16,12 +16,14 @@ def run_rec():
 			bottom_image = "./images/mario.png"
 			st.image(img_sizer(bottom_image))
 			if st.button('Start Game'):
-				subprocess.run([f"{sys.executable}", "Games/Jumping-PyGame/youtubemain.py"])
+				subprocess.run([f"{sys.executable}", "mario.py"])
+			if st.button('Write to board'):
+				st.write("Writing to Board")
 		with col2:
 			st.header("Dino Game Level:"+level)
 			bottom_image = "./images/dino.jpeg"
 			st.image(img_sizer(bottom_image))
 			if st.button('Start Dino'):
-				subprocess.run([f"{sys.executable}", "D1.py"])
+				subprocess.run([f"{sys.executable}", "dino.py"])
 	activity_level = act_lev
 	show_games(activity_level)
