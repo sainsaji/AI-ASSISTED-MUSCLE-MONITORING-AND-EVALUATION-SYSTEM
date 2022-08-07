@@ -27,8 +27,8 @@ def streamlit_menu(example=1):
         with st.sidebar:
             selected = option_menu(
                 menu_title="Main Menu",  # required
-                options=["Home", "Activity Info", "Display Table","Graphs","Recommendations","Game Stats"],  # required
-                icons=["house", "book", "envelope"],  # optional
+                options=["Home", "Activity Info", "Display Table","Visualizations","Recommendations","Game Stats"],  # required
+                icons=["house", "book", "table","bar-chart","person","joystick"],  # optional
                 menu_icon="cast",  # optional
                 default_index=0,  # optional
             )
@@ -109,9 +109,7 @@ elif selected == "Activity Info":
 	run_ml()
 elif selected == "Recommendations":
 	run_Recom()
-else:
-    st.subheader("About")
-    st.info("Built with Streamlit")
+
 	
 
 
