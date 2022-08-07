@@ -23,7 +23,5 @@ def run_rec():
 			st.image(img_sizer(bottom_image))
 			if st.button('Start Dino'):
 				subprocess.run([f"{sys.executable}", "D1.py"])
-
-	
 	activity_level = act_lev
 	show_games(activity_level)
