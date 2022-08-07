@@ -4,8 +4,8 @@ from select import select
 import streamlit as st 
 import streamlit.components.v1 as stc 
 from home_page import run_home_page
-from eda_app import run_eda
-from ml_app import run_ml
+from eda_app import run_table
+from ml_app import run_cap
 from Recom import run_rec
 from streamlit_option_menu import option_menu
 
@@ -101,14 +101,12 @@ selected = streamlit_menu(example=EXAMPLE_NO)
 if selected == "Home":
 	run_home_page()
 	pass
-elif selected == "EDA":
-	run_eda()
-elif selected == "ML":
-	run_ml()
 elif selected == "Activity Info":
-	run_ml()
+	run_cap()
 elif selected == "Recommendations":
 	run_rec()
+elif selected == "Display Table":
+    run_table()
 
 
 	
