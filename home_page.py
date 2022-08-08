@@ -6,55 +6,63 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 from wordcloud import WordCloud
+import pygsheets
+import pandas as pd
+import random
+from google.oauth2 import service_account
+from gsheetsdb import connect
+from datetime import date
+gc = pygsheets.authorize(service_file='./key/key.json')
 
-
-@st.cache
-def load_data(data):
-	df = pd.read_csv(data)
-	return df
 
 def run_home_page():
-	df = load_data("data/thanksgiving_in_multi_lang.csv")
-	# st.dataframe(df)
+	#setting profile coloumns
+	profile_info= {
+		'profile_id':[],
+		'name':[],
+		'age':[],
+		'contact' :[],
+		'activity_level':[],
+		'date':[]
+				}
+
+	#convert columns to data frame
+	ds = pd.DataFrame(profile_info)
+
+	#open sheet
+	sh = gc.open('test_sheet')
+
+	#select work sheet and write dataframe
+	#select the first sheet 
+	wks = sh[0]
+	#update the first sheet with df, starting at cell B2. 
+	if 'regist' not in st.session_state:
+		st.session_state['regist'] = False
+	# wks.set_dataframe(ds,(1,1))
+	def profile_writer(name,age,contact):
+		row_count = len(wks.get_all_records()) + 2
+		id=row_count-1
+		activity_level = ""
+		now_date = str(date.today())
+		data1=[id,name,age,contact,activity_level,now_date]
+		wks.append_table(data1,start='2')
+	
+
+
+	form1 = st.empty()
+	if st.session_state['regist'] == False:
+		with form1.form(key="reg_form"):
+			st.title("Registartion")
+			st.subheader("Enter the details")
+			name = st.text_input("Enter Your Name")
+			contact = st.text_input("Enter Your number")
+			age = st.slider("Enter your age")
+			sub = st.form_submit_button("Submit",on_click=profile_writer(name,age,contact))
+			if sub:
+				st.write("Written to DB")
+				form1.empty()
+				st.session_state['regist'] = True
 
 	
-	with st.beta_expander("Happy Thanksgiving Day",expanded=True):
-		day_text = " ".join(df['Day'].tolist())
-		mywordcloud = WordCloud().generate(day_text)
-		fig = plt.figure()
-		plt.imshow(mywordcloud,interpolation='bilinear')
-		plt.axis('off')
-		st.pyplot(fig)
-
-
-	lang_list = df['Language'].unique().tolist()
-	lang_choice = st.sidebar.selectbox("Lang",lang_list)
-
-
-	if lang_choice:
-		thank_word = df[df["Language"] == lang_choice].iloc[0].Word
-		thank_day = df[df["Language"] == lang_choice].iloc[0].Day
-		st.info("How to Say Happy Thanksgiving in {}".format(lang_choice))
-		st.write({"lang":lang_choice,"word":thank_word,"day":thank_day})
-
-	
-	name = st.text_input("Name","Streamlit")
-	bgcolor = st.beta_color_picker("")
-	modified_name = "From {0} {0} {0}".format(name)
-	updated_text = []
-	updated_text.append(modified_name)
-	updated_text.extend(df['Word'].tolist())
-	# st.write(updated_text)
-	new_text = " ".join(updated_text)
-
-
-	with st.beta_expander("Thanksgiving From {}".format(name)):
-		
-		mywordcloud = WordCloud(background_color=bgcolor).generate(new_text)
-		fig = plt.figure()
-		plt.imshow(mywordcloud,interpolation='bilinear')
-		plt.axis('off')
-		st.pyplot(fig)
-
 
 

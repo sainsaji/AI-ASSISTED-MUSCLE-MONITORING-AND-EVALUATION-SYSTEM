@@ -7,11 +7,12 @@ pygame.init()
 
 CLOCK = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((800, 800))
-pygame.display.set_caption("Jumping in PyGame")
+pygame.display.set_caption("Mario Jump")
 
 X_POSITION, Y_POSITION = 400, 660
-
 jumping = False
+
+
 
 Y_GRAVITY = 0.6
 JUMP_HEIGHT = 10
@@ -19,7 +20,7 @@ Y_VELOCITY = JUMP_HEIGHT
 
 STANDING_SURFACE = pygame.transform.scale(pygame.image.load("assets/mario_standing.png"), (48, 64))
 JUMPING_SURFACE = pygame.transform.scale(pygame.image.load("assets/mario_jumping.png"), (48, 64))
-BACKGROUND = pygame.image.load("assets/background.png")
+BACKGROUND = pygame.image.load("assets/background.png") 
 
 mario_rect = STANDING_SURFACE.get_rect(center=(X_POSITION, Y_POSITION))
 
@@ -33,8 +34,8 @@ while True:
 
     if "jump" in rec_input:
         injump = True
-    
-    
+
+
     keys_pressed = pygame.key.get_pressed()
 
     if injump:

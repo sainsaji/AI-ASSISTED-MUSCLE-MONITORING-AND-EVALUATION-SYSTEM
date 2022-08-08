@@ -27,15 +27,19 @@ def run_table():
 		return rows
 
 	sheet_url = st.secrets["private_gsheets_url"]
-	rows = run_query(f'SELECT * FROM "{sheet_url}"')
-	test = run_query(f'SELECT age FROM "{sheet_url}"')
-	print(type(test))
-	df = pd.DataFrame(rows)
+	sheet2_url = st.secrets["private_ghseets2_url"]
+
+	sheet1_data = run_query(f'SELECT * FROM "{sheet_url}"')
+	sheet2_data = run_query(f'SELECT * FROM "{sheet2_url}"')
+
+	st.write("Personal Info")
+	df = pd.DataFrame(sheet1_data)
 	st.table(df)
 
-	# arr = np.random.normal(1, 1, size=100)
-	# fig, ax = plt.subplots()
-	# ax.hist(arr, bins=20)
+	st.write("Game Data")
+	ds = pd.DataFrame(sheet2_data)
+	st.table(ds)
 
-	# st.pyplot(fig)
+	
+
 
