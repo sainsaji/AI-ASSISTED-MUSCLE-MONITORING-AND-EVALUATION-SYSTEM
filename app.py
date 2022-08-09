@@ -8,17 +8,6 @@ from eda_app import run_table
 from ml_app import run_cap
 from Recom import run_rec
 from streamlit_option_menu import option_menu
-import pygsheets
-import pandas as pd
-import random
-from google.oauth2 import service_account
-from gsheetsdb import connect
-from datetime import date
-
-
-
-gc = pygsheets.authorize(service_file='./key/key.json')
-
 
 st.sidebar.title("AIMES")
 # 1=sidebar menu, 2=horizontal menu,3=Recommendation, 4=horizontal menu w/ custom menu

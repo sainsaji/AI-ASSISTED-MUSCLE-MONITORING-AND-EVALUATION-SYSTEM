@@ -1,7 +1,7 @@
 import pygame
 import sys
 import serial
-from ml_app import act_lev
+
 ser = serial.Serial("/dev/ttyUSB0", 9600)
 pygame.init()
 

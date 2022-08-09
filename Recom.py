@@ -2,7 +2,7 @@ import streamlit as st
 import subprocess
 import sys
 from PIL import Image
-from ml_app import act_lev
+
 def run_rec():
 	col1, col2= st.columns(2,gap="large")
 	def show_games(level):
@@ -25,5 +25,5 @@ def run_rec():
 			st.image(img_sizer(bottom_image))
 			if st.button('Start Dino'):
 				subprocess.run([f"{sys.executable}", "dino.py"])
-	activity_level = act_lev
+	activity_level = "Low"
 	show_games(activity_level)
