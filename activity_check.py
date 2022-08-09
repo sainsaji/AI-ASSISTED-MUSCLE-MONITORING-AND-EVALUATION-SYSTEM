@@ -3,9 +3,8 @@ import cv2
 import numpy as np
 import time
 import matplotlib.pyplot as plt
-import os
-os.environ.pop("QT_QPA_PLATFORM_PLUGIN_PATH")
 
+time_lim = 30
 # =============================================================================
 # USER-SET PARAMETERS
 # =============================================================================
@@ -49,7 +48,7 @@ count=0
 while True:
     instant_time = time.time()
     elapsed= instant_time - curr_time
-    if(elapsed>=30):
+    if(elapsed>=time_lim):
         break
     # Set transient motion detected as false
     transient_movement_flag = False
@@ -151,8 +150,9 @@ while True:
         break
 
 # Cleanup when closed
-print(activity_info)
-plt.plot(activity_info,activity_sec)
+plt.plot(activity_sec,activity_info)
+high_count = activity_info.count(100)
+print(high_count)
 plt.show()
 cv2.waitKey(0)
 cv2.destroyAllWindows()
