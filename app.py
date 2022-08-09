@@ -8,11 +8,13 @@ from eda_app import run_table
 from ml_app import run_cap
 from Recom import run_rec
 from streamlit_option_menu import option_menu
+import time
 
 st.sidebar.title("AIMES")
 # 1=sidebar menu, 2=horizontal menu,3=Recommendation, 4=horizontal menu w/ custom menu
 EXAMPLE_NO = 1
 
+    
 registered = False
 def streamlit_menu(example=1):
     if example == 1:

@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import time
 import matplotlib.pyplot as plt
+import pygsheets
 
 time_lim = 30
 # =============================================================================
@@ -151,8 +152,33 @@ while True:
 
 # Cleanup when closed
 plt.plot(activity_sec,activity_info)
+
+
 high_count = activity_info.count(100)
-print(high_count)
+def activity_write(level):
+    gc = pygsheets.authorize(service_file='./key/key.json')
+    sh = gc.open('test_sheet')
+    wks = sh[0]
+    current_row_count = len(wks.get_all_records()) + 1
+    cell_addr = "E"+str(current_row_count)
+    print(cell_addr)
+    value = wks.get_value(cell_addr)
+
+    if len(value)==0:
+        wks.update_value(cell_addr, level, parse=None)
+
+def plot_write(activity_sec,activity_info):
+    pass
+
+if high_count!=0:
+    plot_write(activity_sec,activity_info)
+    if high_count<100:
+        activity_write("Low")
+    if high_count>=100 and high_count<=300:
+        activity_write("Medium")
+    if high_count>=300:
+        activity_write("High")
+
 plt.show()
 cv2.waitKey(0)
 cv2.destroyAllWindows()
