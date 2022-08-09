@@ -25,15 +25,6 @@ st.sidebar.title("AIMES")
 EXAMPLE_NO = 1
 
 registered = False
-
-
-
-    
-        
-    
-        
-        
-
 def streamlit_menu(example=1):
     if example == 1:
         # 1. as sidebar menu
@@ -113,7 +104,6 @@ def streamlit_menu(example=1):
 selected = streamlit_menu(example=EXAMPLE_NO)
 if selected == "Home":
 	run_home_page()
-	pass
 elif selected == "Activity Info":
 	run_cap()
 elif selected == "Recommendations":

@@ -32,8 +32,13 @@ def run_table():
 	sheet1_data = run_query(f'SELECT * FROM "{sheet_url}"')
 	sheet2_data = run_query(f'SELECT * FROM "{sheet2_url}"')
 
+	
+
 	st.write("Personal Info")
 	df = pd.DataFrame(sheet1_data)
+	df["age"] = df["age"].astype(int)
+	df["activity_level"] = df["activity_level"].fillna(0)
+	df = df.dropna()
 	st.table(df)
 
 	st.write("Game Data")
