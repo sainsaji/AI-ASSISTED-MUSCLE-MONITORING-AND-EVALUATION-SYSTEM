@@ -1,2 +1,1 @@
-# black-friday-sales_streamlit-app
-Black Friday Sales Prediction &amp; Thanksgiving App
+An app for Evaluating Muscle Strength and Cordination
